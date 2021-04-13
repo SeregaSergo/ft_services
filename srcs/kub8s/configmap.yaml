@@ -10,3 +10,13 @@ data:
       protocol: layer2
       addresses:
       - 192.168.99.100-192.168.99.254
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: default
+  name: config-env
+data:
+  WPPORT: "5050"
+  PMAPORT: "5000"
+  MSQLPORT: "3306"
