@@ -10,7 +10,6 @@ RUN adduser -D -g 'www' www
 RUN mkdir -p /usr/share/webapps/
 RUN mkdir /var/www/bswag_site.com
 RUN mkdir -p /run/nginx 
-COPY ./index.php /var/www/bswag_site.com
 COPY ./start_script.sh /tmp/start_script.sh
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./supervisord.conf /etc/supervisord.conf
@@ -20,13 +19,10 @@ RUN tar -xzf latest-ru_RU.tar.gz
 RUN rm latest-ru_RU.tar.gz
 RUN mv wordpress /usr/share/webapps/wordpress
 COPY ./wp-config.php /usr/share/webapps/wordpress/
+COPY myscript.php /usr/share/webapps/wordpress/
 RUN chown -R www:www /var/lib/nginx
 RUN chown -R www:www /usr/share/webapps/
 RUN ln -s /usr/share/webapps/wordpress/ /var/www/bswag_site.com/wordpress
-
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-	-keyout /etc/ssl/cert.key -out /etc/ssl/cert.crt \
-	-subj "/C=RU/ST=Moscow/L=.../O=.../OU=.../CN=.../emailAddress=bswag@student.21-school.ru"
 
 VOLUME /mnt/mysql
 

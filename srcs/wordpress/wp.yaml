@@ -38,7 +38,7 @@ spec:
         - containerPort: 5050
         env:
         - name: WORDPRESS_DB_NAME
-          value: wordpress_db
+          value: wordpress
         - name: WORDPRESS_DB_HOST
           value: mysql-service
         - name: MYSQL_ROOT_PASSWORD

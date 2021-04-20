@@ -9,7 +9,7 @@ spec:
     - port: 3306
   selector:
     app: mysql
-  clusterIP: None
+  clusterIP: 10.104.109.185
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

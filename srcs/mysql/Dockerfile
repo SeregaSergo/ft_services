@@ -11,6 +11,7 @@ RUN rm -rf /var/cache/apk && \
 COPY ./start_script.sh /tmp/start_script.sh
 RUN chmod +x /tmp/start_script.sh
 COPY ./my.cnf /etc/
+COPY wordpress.sql ./
 
 VOLUME /var/lib/mysql
 
