@@ -9,4 +9,7 @@ case "$1" in
     -w) kubectl delete deploy wp-deployment
         docker build -t wp_img ./srcs/wordpress
         kubectl apply -f ./srcs/wordpress/wp.yaml;;
+    -f) kubectl delete deploy ftps-deployment
+        docker build -t ftps_img ./srcs/ftps
+        kubectl apply -f ./srcs/ftps/ftps.yaml;;
 esac

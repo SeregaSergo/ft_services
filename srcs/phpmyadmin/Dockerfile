@@ -19,12 +19,9 @@ RUN tar -xzf phpMyAdmin-5.0.4-all-languages.tar.gz
 RUN rm phpMyAdmin-5.0.4-all-languages.tar.gz
 RUN mv phpMyAdmin-5.0.4-all-languages /usr/share/webapps/phpmyadmin
 RUN chown -R www:www /var/lib/nginx
-RUN mkdir /usr/share/webapps/phpmyadmin/tmp
 RUN ln -s /usr/share/webapps/phpmyadmin/ /var/www/bswag_site.com/phpmyadmin
-#RUN ln -s /usr/share/webapps/phpmyadmin/ /usr/share/webapps/phpmyadmin/phpmyadmin
 
 COPY config.inc.php /usr/share/webapps/phpmyadmin/
-COPY myscript.php /usr/share/webapps/phpmyadmin/
 RUN chown -R www:www /usr/share/webapps/
 RUN chown -R www:www /var/www/bswag_site.com/
 

@@ -19,3 +19,6 @@ kubectl apply -f ./srcs/phpmyadmin/pma.yaml
 
 docker build -t nginx_img ./srcs/nginx
 kubectl apply -f ./srcs/nginx/nginx.yaml
+
+docker build -t ftps_img ./srcs/ftps
+kubectl apply -f ./srcs/ftps/ftps.yaml

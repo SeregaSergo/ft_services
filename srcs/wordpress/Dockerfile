@@ -7,9 +7,9 @@ RUN apk update && apk upgrade && apk add nginx wget supervisor php7-fpm php7-mcr
 	php7-iconv php7-pdo_dblib php7-curl php7-ctype openssl mysql-client php7-zlib
 
 RUN adduser -D -g 'www' www
-RUN mkdir -p /usr/share/webapps/
-RUN mkdir /var/www/bswag_site.com
-RUN mkdir -p /run/nginx 
+RUN mkdir -p /usr/share/webapps/ && \
+	mkdir /var/www/bswag_site.com && \
+	mkdir -p /run/nginx 
 COPY ./start_script.sh /tmp/start_script.sh
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./supervisord.conf /etc/supervisord.conf
@@ -19,12 +19,11 @@ RUN tar -xzf latest-ru_RU.tar.gz
 RUN rm latest-ru_RU.tar.gz
 RUN mv wordpress /usr/share/webapps/wordpress
 COPY ./wp-config.php /usr/share/webapps/wordpress/
-COPY myscript.php /usr/share/webapps/wordpress/
 RUN chown -R www:www /var/lib/nginx
 RUN chown -R www:www /usr/share/webapps/
 RUN ln -s /usr/share/webapps/wordpress/ /var/www/bswag_site.com/wordpress
 
-VOLUME /mnt/mysql
+# VOLUME /mnt/mysql
 
 EXPOSE 5050
 
