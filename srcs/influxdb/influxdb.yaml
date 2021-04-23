@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inflx-service
+  labels:
+    app: inflx
+spec:
+  selector:
+    app: inflx
+  ports:
+    - port: 8086
+      targetPort: 8086
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: inflx-pv-claim
+  labels:
+    app: inflx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 300Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inflx-deployment
+  labels:
+    app: inflx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inflx
+  template:
+    metadata:
+      labels:
+        app: inflx
+    spec:
+      containers:
+      - name: inflx
+        image: inflx_img
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8086
+          name: inflx
+        volumeMounts:
+          - name: inflx-data
+            mountPath: "/var/lib/influxdb"
+          - name: inflx-config
+            mountPath: /etc/influxdb/influxdb.conf
+            subPath: influxdb.conf
+            readOnly: true
+      volumes:
+      - name: inflx-data
+        persistentVolumeClaim:
+          claimName: inflx-pv-claim
+      - name: inflx-config
+        configMap:
+          name: inflx-config

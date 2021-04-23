@@ -22,3 +22,13 @@ kubectl apply -f ./srcs/nginx/nginx.yaml
 
 docker build -t ftps_img ./srcs/ftps
 kubectl apply -f ./srcs/ftps/ftps.yaml
+
+docker build -t inflx_img ./srcs/influxdb
+kubectl apply -f ./srcs/influxdb/influx-config.yaml
+kubectl apply -f ./srcs/influxdb/influxdb.yaml
+
+docker build -t telegraf_img ./srcs/telegraf
+kubectl apply -f ./srcs/telegraf/telegraf.yaml
+
+docker build -t grafana_img ./srcs/grafana
+kubectl apply -f ./srcs/grafana/grafana.yaml

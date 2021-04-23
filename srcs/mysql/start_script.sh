@@ -4,8 +4,8 @@ openrc-init
 openrc boot
 touch /run/openrc/softlevel
 /usr/bin/mysql_install_db --user=root --datadir=/var/lib/mysql
-service mariadb start
-
+# service mariadb start
+/usr/bin/mysqld --user=mysql
 db_name=/var/lib/mysql/wordpress
 
 if [ ! -d $db_name ]
@@ -17,4 +17,5 @@ then
     mysql -u root wordpress < wordpress.sql
 fi
 
-sleep infinity
+# rc-service mariadb stop
+# /usr/bin/mysqld --user=mysql
