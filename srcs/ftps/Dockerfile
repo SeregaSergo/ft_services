@@ -12,8 +12,10 @@ RUN echo "bswag:bswag" | chpasswd
 RUN touch /etc/vsftpd.user_list
 RUN	mkdir -p /var/log/vsftpd
 RUN touch /var/log/vsftpd/vsftpd.log
+COPY ./start_script.sh /tmp/
+RUN chmod +x /tmp/start_script.sh
 
 EXPOSE 21 20 30021
 VOLUME /ftp
 
-CMD ["vsftpd", "/etc/vsftpd/vsftpd.conf"]
+CMD ["/tmp/start_script.sh"]
